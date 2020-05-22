@@ -4,20 +4,6 @@ const jwt = require('jsonwebtoken');
 const Users = require('./user-model');
 const secrets = require('../config/secrets.js');
 
-// REGISTER USER
-// router.post('/register', (req, res) => {
-// 	let user = req.body;
-// 	const hash = bcrypt.hashSync(user.password, 4);
-// 	user.password = hash;
-// 	Users.add(user)
-// 		.then((saved) => {
-// 			res.status(201).json(saved);
-// 		})
-// 		.catch((err) => {
-// 			res.status(500).json(err);
-// 		});
-// });
-
 router.post('/register', (req, res) => {
 	// implement registration
 	const { username, password } = req.body;
@@ -66,7 +52,6 @@ function createToken(user) {
 		userid: user.id,
 		username: user.username,
 	};
-	const secret = secrets.jwtSecret;
 	const options = { expiresIn: '1h' };
 
 	const token = jwt.sign(payload, secrets.jwtSecret, options);
